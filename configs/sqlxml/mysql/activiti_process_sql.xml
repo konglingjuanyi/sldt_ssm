@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:hibernate xmlns:ns="http://www.sldt.mds.com/xml/ns/j2ee/hibernate"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.sldt.mds.com/xml/ns/j2ee/hibernate LTHibernateSchema.xsd">
+
+	<statement id="getTaskInstByPage">
+		from WfRuTask u where 1=1
+		<dynamic-field property="procInstId">
+			and u.procInstId = #procInstId#
+		</dynamic-field>
+		<dynamic-field property="assignee">
+			and u.assignee = #assignee#
+		</dynamic-field>
+		ORDER BY u.taskInstId
+	</statement>
+
+	<statement id="getWfRuTaskByUserId">
+		SELECT
+		t2.task_inst_id as taskInstId,
+		t2.act_task_inst_id as actTaskInstId,
+		t2.act_proc_def_id as actProcDefId,
+		t2.act_proc_inst_id as actProcInstId,
+		t2.proc_inst_id as procInstId,
+		t2.proc_id as procId,
+		t2.task_id as taskId,
+		t2.act_id as actId,
+		t2.act_name as actName,
+		t2.act_type as actType,
+		t2.owner as owner,
+		t2.assignee as assignee,
+		t2.delegationstate as delegationstate,
+		t2.operate_type as operateType,
+		t2.state as state,
+		t2.description as description,
+		t2.created_by as createdBy,
+		t2.date_created as dateCreated,
+		t2.updated_by as updatedBy,
+		t2.date_updated as dateUpdated
+		FROM t_wf_ru_task t2,
+		t_wf_re_task_oper t1
+		WHERE t1.task_id = t2.task_id
+		AND t2.assignee IS NULL
+		<dynamic-field property="userId">
+			and t1.user_id = #userId#
+		</dynamic-field>
+		<dynamic-field property="groupId">
+			and t1.group_id = #groupId#
+		</dynamic-field>
+		order by t2.task_inst_id
+	</statement>
+	<statement id="statisticsWfRuTaskByUserId">
+		SELECT count(*) FROM t_wf_ru_task t2,t_wf_re_task_oper t1
+		WHERE t1.task_id = t2.task_id
+		AND t2.assignee IS NULL
+		<dynamic-field property="userId">
+			and t1.user_id = #userId#
+		</dynamic-field>
+		<dynamic-field property="groupId">
+			and t1.group_id = #groupId#
+		</dynamic-field>
+	</statement>
+	
+	<statement id="getWfRuTaskByUserId_Ext">
+		SELECT
+		t2.task_inst_id AS taskInstId,
+		t2.act_task_inst_id AS actTaskInstId,
+		t2.act_proc_def_id AS actProcDefId,
+		t2.act_proc_inst_id AS actProcInstId,
+		t2.proc_inst_id AS procInstId,
+		t2.proc_id AS procId,
+		t2.task_id AS taskId,
+		t2.act_id AS actId,
+		t2.act_name AS actName,
+		t2.act_type AS actType,
+		t2.owner AS OWNER,
+		t2.assignee AS assignee,
+		t2.delegationstate AS delegationstate,
+		t2.operate_type AS operateType,
+		t2.state AS state,
+		t2.description AS description,
+		t2.created_by AS createdBy,
+		t2.date_created AS dateCreated,
+		t2.updated_by AS updatedBy,
+		t2.date_updated AS dateUpdated
+		FROM t_wf_ru_task t2
+		INNER JOIN t_wf_re_task_oper t1 ON t1.task_id = t2.task_id 
+		INNER JOIN t_sm_user_role_cfg t3 ON t1.group_id=t3.role_id  
+		<dynamic-field property="userId">
+			AND t3.user_id=#userId#
+		</dynamic-field>
+		UNION 
+		SELECT
+			t2.task_inst_id AS taskInstId,
+			t2.act_task_inst_id AS actTaskInstId,
+			t2.act_proc_def_id AS actProcDefId,
+			t2.act_proc_inst_id AS actProcInstId,
+			t2.proc_inst_id AS procInstId,
+			t2.proc_id AS procId,
+			t2.task_id AS taskId,
+			t2.act_id AS actId,
+			t2.act_name AS actName,
+			t2.act_type AS actType,
+			t2.owner AS OWNER,
+			t2.assignee AS assignee,
+			t2.delegationstate AS delegationstate,
+			t2.operate_type AS operateType,
+			t2.state AS state,
+			t2.description AS description,
+			t2.created_by AS createdBy,
+			t2.date_created AS dateCreated,
+			t2.updated_by AS updatedBy,
+			t2.date_updated AS dateUpdated
+		FROM t_wf_ru_task t2
+		INNER JOIN t_wf_re_task_oper t1 ON t1.task_id = t2.task_id 
+		WHERE t2.assignee IS NOT NULL 
+		<dynamic-field property="userId">
+			AND t2.assignee = #userId# 
+		</dynamic-field>
+	</statement>
+	
+	<statement id="getWfProcessCfg">
+		from WfReProcess wf where 1=1
+		<dynamic-field property="actKey">
+			and wf.actProcDefKey = #actKey#
+		</dynamic-field>
+		<dynamic-field property="procId">
+			and wf.procId = #procId#
+		</dynamic-field>
+	</statement>
+	
+	
+</ns:hibernate>

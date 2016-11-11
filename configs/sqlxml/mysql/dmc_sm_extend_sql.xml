@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:hibernate xmlns:ns="http://www.sldt.mds.com/xml/ns/j2ee/hibernate"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   xsi:schemaLocation="http://www.sldt.mds.com/xml/ns/j2ee/hibernate LTHibernateSchema.xsd">
+	<statement id="noticeListByPage">
+		select new map(noticeId as noticeId, title as title ,subTitle as subTitle ,publishTime as publishTime , publishUser as publishUser ,state as state) from TSmNotice n where 1=1
+		<dynamic-field property="title">
+			and n.title like #title#
+		</dynamic-field>
+		<dynamic-field property="state">
+			and n.state = #state#
+		</dynamic-field>
+		order by updTime desc
+	</statement>
+	
+	<statement id="getNoticeListByPageSql">
+		SELECT U.NAME AS PUBLISH_USER_NAME,N.* FROM T_SM_NOTICE N 
+		LEFT JOIN T_SM_USER U ON U.USER_ID=N.PUBLISH_USER 
+		WHERE 1=1 
+		<dynamic-field property="searchTitle">
+		   AND N.TITLE LIKE concat('%',#searchTitle#,'%') 
+		</dynamic-field>
+		<dynamic-field property="state">
+		   AND N.STATE = #state# 
+		</dynamic-field>
+		<dynamic-field property="startTime">
+		   AND N.PUBLISH_TIME &gt;= #startTime# 
+		</dynamic-field>
+		<dynamic-field property="endTime">
+		   AND N.PUBLISH_TIME &lt;= #endTime#  
+		</dynamic-field>
+		<dynamic-field property="searchUser">
+		   AND (U.NAME LIKE concat('%',#searchUser#,'%') OR U.USER_ID LIKE concat('%',#searchUser#,'%'))
+		</dynamic-field>
+		ORDER BY N.PUBLISH_TIME DESC
+	</statement>
+	
+	<statement id="annouceList">
+	SELECT 
+			q.QUES_ID AS   QUES_ID  ,
+			q.QUES_DESC AS  QUES_DESC  ,
+			q.INFLUENCE AS  INFLUENCE,
+			q.ABOUT_SYS AS  ABOUT_SYS ,
+			q.ABOUT_DEPT AS    ABOUT_DEPT ,
+			q.QUES_PERSON AS  QUES_PERSON   ,
+			q.QUES_DATE   AS   QUES_DATE ,
+			q.QUES_TYPE AS    QUES_TYPE  ,
+			q.QUES_FB_STATE   AS    QUES_FB_STATE  ,
+			q.QUES_SOLUTION AS  QUES_SOLUTION ,
+			q.QUES_SOLUTION_STATE AS  QUES_SOLUTION_STATE  ,
+			q.QUES_JJ_STATE   AS   QUES_JJ_STATE ,
+			q.QUES_JJ_RESULT AS    QUES_JJ_RESULT  
+	FROM  T_SM_QUES  AS  q   
+	WHERE 1=1
+    <dynamic-field property="quesId">
+		and q.QUES_ID= #quesId#
+    </dynamic-field>
+    <dynamic-field property="quesFbState">
+		and q.QUES_FB_STATE= #quesFbState#
+    </dynamic-field>
+    <dynamic-field property="quesType">
+		and q.QUES_TYPE= #quesType#
+    </dynamic-field>
+    <dynamic-field property="quesSolutionState">
+		and q.QUES_SOLUTION_STATE= #quesSolutionState#
+    </dynamic-field>
+    <dynamic-field property="quesJjState">
+		and q.QUES_JJ_STATE= #quesJjState#
+    </dynamic-field>
+    ORDER BY q.QUES_ID DESC,q.QUES_DATE DESC
+	</statement>
+	
+	<statement id="dealList">
+	SELECT 
+			q.QUES_ID AS   QUES_ID  ,
+			q.QUES_DESC AS  QUES_DESC  ,
+			q.QUES_DATE   AS   QUES_DATE ,
+			q.QUES_PERSON AS  QUES_PERSON   ,
+			q.QUES_TYPE AS    QUES_TYPE  ,
+			q.QUES_SOLUTION AS  QUES_SOLUTION ,
+			q.QUES_SOLUTION_STATE AS  QUES_SOLUTION_STATE  ,
+			q.QUES_JJ_STATE   AS   QUES_JJ_STATE ,
+			q.QUES_JJ_DATE   AS   QUES_JJ_DATE ,
+			q.QUES_JJ_RESULT AS    QUES_JJ_RESULT 
+			 		
+			
+	FROM  T_SM_QUES  AS  q   
+	WHERE q.QUES_FB_STATE='已发布'
+    <dynamic-field property="quesId">
+		and q.QUES_ID like #quesId#
+    </dynamic-field>
+    <dynamic-field property="quesJjState">
+		and q.QUES_JJ_STATE= #quesJjState#
+    </dynamic-field>
+    <dynamic-field property="quesSolutionState">
+		and q.QUES_SOLUTION_STATE= #quesSolutionState#
+    </dynamic-field>
+    <dynamic-field property="quesType">
+		and q.QUES_TYPE= #quesType#
+    </dynamic-field>
+    ORDER BY q.QUES_ID DESC,q.QUES_DATE DESC
+	</statement>
+	
+	<!-- 知识库分类List -->
+	<statement id="knoCatsList">
+	SELECT 
+	new Map(
+	u.kncatId as kncatId,
+	u.kncatName as kncatName,
+	u.kncatDesp as kncatDesp
+	)
+    FROM 
+		TSmKnoCats AS u 
+	WHERE 1=1
+	<dynamic-field property="kncatName">
+		and u.kncatName like #kncatName#
+    </dynamic-field>
+    ORDER BY u.kncatId DESC ,u.crtDate DESC
+	</statement>
+	<!-- 知识库内容List -->
+	<statement id="knoContentsList">
+	SELECT
+		a.KNCNT_ID AS KNCNT_ID,
+		a.KNCNT_TITLE AS KNCNT_TITLE,
+		a.PLAN_TITLE AS PLAN_TITLE,
+		b.KNCAT_NAME AS KNCAT_NAME,
+		a.KNCNT_KEY AS KNCNT_KEY
+	FROM
+	T_SM_KNO_CONTENTS a LEFT JOIN T_SM_KNO_CATS b
+	ON a.KNCAT_ID=b.KNCAT_ID
+	WHERE 1=1
+	<dynamic-field property="kncatId">
+		<!--and b.KNCAT_NAME = #kncatId#-->
+		and a.KNCAT_ID= #kncatId#
+    </dynamic-field>
+	<dynamic-field property="kncntTitle">
+		and a.KNCNT_TITLE like #kncntTitle#
+    </dynamic-field>
+	<dynamic-field property="kncntKey">
+		and a.KNCNT_KEY like #kncntKey#
+    </dynamic-field>
+	<dynamic-field property="allField">
+		and (b.KNCAT_NAME like #allField#
+		or a.KNCNT_ID like #allField#
+		or a.KNCNT_TITLE like #allField#
+		or a.PLAN_TITLE like #allField#
+		or a.KNCNT_KEY like #allField#)
+    </dynamic-field>
+    ORDER BY a.KNCNT_ID DESC ,a.CRT_DATE DESC
+	</statement>
+	
+	<!-- 数据质量问题趋势查询 -->
+	<statement id="ques_getQuesTypeCount">
+		SELECT t1.DT,SUM(t1.CNT) AS CNT FROM(
+			SELECT
+				SUBSTR(QUES_DATE FROM 1 FOR 7) AS DT ,
+				count(t.QUES_DATE) AS CNT
+			FROM
+				t_sm_ques t
+			WHERE
+				t.QUES_TYPE = '$quesType$'
+				AND t.QUES_DATE &gt;= '$startDate$'
+				AND t.QUES_DATE &lt;= '$endDate$'
+				GROUP BY
+			t.QUES_DATE ASC) t1 GROUP BY t1.DT 
+			ORDER BY t1.DT 	ASC
+	</statement>
+	<statement id="ques_getQuesTypeCountJj">
+		SELECT t1.DT,SUM(t1.CNT) AS CNT FROM(
+			SELECT
+				SUBSTR(QUES_JJ_DATE FROM 1 FOR 7) AS DT ,
+				count(t.QUES_JJ_DATE) AS CNT
+			FROM
+				t_sm_ques t
+			WHERE
+				t.QUES_TYPE = '$quesType$'
+				AND t.QUES_JJ_DATE &gt;= '$startDate$'
+				AND t.QUES_JJ_DATE &lt;= '$endDate$'
+				GROUP BY
+			t.QUES_JJ_DATE ASC) t1 GROUP BY t1.DT 
+			ORDER BY t1.DT 	ASC
+	</statement>
+</ns:hibernate>

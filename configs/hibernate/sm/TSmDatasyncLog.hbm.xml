@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.mds.dmc.sm.entity.TSmDatasyncLog"
+		table="T_SM_DATASYNC_LOG" lazy="true" batch-size="20">
+		<id name="datasyncLogId" type="java.lang.String">
+			<column name="DATASYNC_LOG_ID" length="32" />
+			<generator class="assigned" />
+		</id>
+		<property name="taskType" type="java.lang.String">
+			<column name="TASK_TYPE" length="1" />
+		</property>
+		<property name="taskName" type="java.lang.String">
+			<column name="TASK_NAME" length="60" />
+		</property>
+		<property name="taskStartDT" type="timestamp">
+			<column name="TASK_START_DT" />
+		</property>
+		<property name="taskEndDT" type="timestamp">
+			<column name="TASK_END_DT" />
+		</property>
+		<property name="syncServerIp" type="java.lang.String">
+			<column name="SYNC_SERVER_IP" length="16" />
+		</property>
+		<property name="operr" type="java.lang.String">
+			<column name="OPERR" length="32" />
+		</property>
+		<property name="recCnt" type="integer">
+			<column name="REC_CNT" />
+		</property>
+		<property name="succRecCnt" type="integer">
+			<column name="SUCC_REC_CNT" />
+		</property>
+		<property name="failRecCnt" type="integer">
+			<column name="FAIL_REC_CNT" />
+		</property>
+	</class>
+</hibernate-mapping>

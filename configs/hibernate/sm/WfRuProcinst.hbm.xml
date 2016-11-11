@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.activiti.process.domain.WfRuProcinst" table="t_wf_ru_procinst" lazy="true" batch-size="20">
+		<id name="procInstId" type="java.lang.String">
+            <column name="proc_inst_id" length="64" />
+            <generator class="assigned"></generator>
+		</id>
+		<property name="actProcInstId" type="java.lang.String">
+			<column name="act_proc_inst_id" length="64" />
+        </property>
+         <property name="actProcDefId" type="java.lang.String">
+            <column name="act_proc_def_id" length="64" />
+        </property>
+        <property name="procId" type="java.lang.String">
+            <column name="proc_id" length="64"/>
+        </property>
+        <property name="businessType" type="java.lang.String">
+			<column name="business_type" length="32" />
+        </property>
+        <property name="businessId" type="java.lang.String">
+			<column name="business_id" length="64" />
+        </property>
+        <property name="startTime" type="java.lang.String">
+			<column name="start_time" />
+		</property>
+		<property name="startUserId" type="java.lang.String">
+			<column name="start_user_id" length="64" />
+        </property>
+        <property name="startUserName" type="java.lang.String">
+			<column name="start_user_name" length="128" />
+        </property>
+        <property name="endTime" type="java.lang.String">
+			<column name="end_time" />
+		</property>
+		<property name="endUserId" type="java.lang.String">
+			<column name="end_user_id" length="64" />
+        </property>
+        <property name="endUserName" type="java.lang.String">
+			<column name="end_user_name" length="128" />
+        </property>
+		<property name="suspensionState" type="java.lang.String">
+			<column name="suspension_state" length="2" />
+        </property>
+        <property name="state" type="java.lang.String">
+			<column name="state" length="2" />
+        </property>
+        <property name="remark" type="java.lang.String">
+			<column name="remark" length="500" />
+        </property>
+		
+       	<property name="createdBy" type="java.lang.String">
+            <column name="created_by" length="100" />
+        </property>
+        
+        <property name="dateCreated" type="java.lang.String">
+            <column name="date_created" length="30" />
+        </property>
+        
+        <property name="updatedBy" type="java.lang.String">
+            <column name="updated_by" length="100" />
+        </property>
+        <property name="dateUpdated" type="java.lang.String">
+            <column name="date_updated" length="30" />
+        </property>
+        
+        <set name="tasks" inverse="true" lazy="true">
+            <key>
+                <column name="proc_inst_id" length="64" not-null="true" />
+            </key>
+            <one-to-many class="com.sldt.activiti.process.domain.WfRuTask" />
+        </set>
+        <set name="tasksOpers" inverse="true" lazy="true">
+            <key>
+                <column name="proc_inst_id" length="64" not-null="true" />
+            </key>
+            <one-to-many class="com.sldt.activiti.process.domain.WfRuTaskOper" />
+        </set>
+    </class>
+</hibernate-mapping>

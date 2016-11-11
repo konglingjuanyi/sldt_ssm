@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:hibernate xmlns:ns="http://www.sldt.mds.com/xml/ns/j2ee/hibernate"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   xsi:schemaLocation="http://www.sldt.mds.com/xml/ns/j2ee/hibernate LTHibernateSchema.xsd">
+	
+	<statement id="loginUser">
+		from TPrivilegeUser where userId = #userId#
+	</statement>
+	
+	<statement id="listUser">
+		from TPrivilegeUser a where 1=1
+        <dynamic-field property="userName">
+			and upper(a.userName) like #userName#
+		</dynamic-field>
+		<dynamic-field property="userId">
+			and a.userId=#userId#
+		</dynamic-field>
+		<dynamic-field property="userIds">
+			and a.userId in ($userIds$)
+		</dynamic-field>
+		<dynamic-field property="groupId">
+            and exists(
+                select 1 from TPrivilegeGroupUser r
+                where r.userId=a.userId and r.groupId=#groupId#
+            )
+        </dynamic-field>
+        <dynamic-field property="groupName">
+            and exists(
+                select 1 from TPrivilegeGroupUser r, TPrivilegeGroup g
+                where r.userId=a.userId and r.groupId=g.groupId
+                  and upper(g.groupName) like #groupName#
+            )
+        </dynamic-field>
+		order by a.userId
+	</statement>
+	
+	<statement id="listRole">
+		from TPrivilegeRole a where 1=1
+		<dynamic-field property="roleName">
+			and upper(a.roleName) like #roleName#
+		</dynamic-field>
+		<dynamic-field property="roleId">
+			and a.roleId=#roleId#
+		</dynamic-field>
+		<dynamic-field property="builtIn">
+            and a.builtIn=#builtIn#
+        </dynamic-field>
+		<dynamic-field property="roleIds">
+			and a.roleId in ($roleIds$)
+		</dynamic-field>
+		order by a.roleId
+	</statement>
+	
+	<statement id="listGroup">
+		from TPrivilegeGroup a where 1=1
+		<dynamic-field property="groupName">
+			and upper(a.groupName) like #groupName#
+		</dynamic-field>
+		<dynamic-field property="parentGroupName">
+            and a.parentGroupId in (
+                select groupId from TPrivilegeGroup
+                where upper(groupName) like #parentGroupName#
+            )
+        </dynamic-field>
+        <dynamic-field property="parentGroupId">
+            and a.parentGroupId = #parentGroupId#
+        </dynamic-field>
+        <dynamic-field property="getTopGroup">
+            and a.parentGroupId is null
+        </dynamic-field>
+		<dynamic-field property="groupId">
+			and a.groupId=#groupId#
+		</dynamic-field>
+		<dynamic-field property="groupIds">
+			and a.groupId in ($groupIds$)
+		</dynamic-field>
+		order by a.groupName
+	</statement>
+ 
+    <statement id="listGroupByUsers">
+        from TPrivilegeGroup a, TPrivilegeGroupUser r
+        where r.groupId=a.groupId 
+        <dynamic-field property="userId">
+            and r.userId = #userId#
+        </dynamic-field>
+        <dynamic-field property="userIds">
+            and r.userId in ($userIds$)
+        </dynamic-field>
+    </statement>
+	
+	<statement id="listMenu">
+        from TPrivilegeMenu a where 1=1
+        <dynamic-field property="menuCode">
+            and a.menuCode like #menuCode#
+        </dynamic-field>
+        <dynamic-field property="menuName">
+            and a.menuName like #menuName#
+        </dynamic-field>
+        <dynamic-field property="parentMenuCode">
+            and a.parentMenuCode like #parentMenuCode#
+        </dynamic-field>
+        <dynamic-field property="userId">
+            and exists(select 1 from TPrivilegeResourceLink r, TPrivilegeRoleLink e
+                where r.resourceId=a.menuCode and r.linkId=e.roleId
+                  and e.linkId=#userId# and r.resourceType='menu' and r.linkType='role' and e.linkType='user'
+            )
+        </dynamic-field>
+        order by a.parentMenuCode, a.menuOrder
+    </statement>
+	
+	<statement id="listMenuFunc">
+        from TPrivilegeMenuFunc a where 1=1
+        <dynamic-field property="funcName">
+            and a.funcName like #funcName#
+        </dynamic-field>
+        <dynamic-field property="funcCode">
+            and a.funcCode=#funcCode#
+        </dynamic-field>
+        <dynamic-field property="userId">
+            and exists(select 1 from TPrivilegeResourceLink r, TPrivilegeRoleLink e
+			    where r.resourceId=a.funcCode and r.linkId=e.roleId
+                  and e.linkId=#userId# and r.resourceType='function' and r.linkType='role' and e.linkType='user'
+			)
+        </dynamic-field>
+        <dynamic-field property="roleId">
+            and exists(select 1 from TPrivilegeResourceLink r
+                where r.resourceId=a.funcCode and r.linkId=#roleId#
+                  and r.resourceType='function' and r.linkType='role'
+            )
+        </dynamic-field>
+        <dynamic-field property="roleIds">
+            and exists(select 1 from TPrivilegeResourceLink r
+                where r.resourceId=a.funcCode and r.linkId in ($roleIds$)
+                  and r.resourceType='function' and r.linkType='role'
+            )
+        </dynamic-field>
+        order by a.menuCode,a.funcCode
+    </statement>
+    
+    <statement id="deleteMenuFunc">
+        delete from TPrivilegeMenuFunc a where 1=1
+        <dynamic-field property="funcCode">
+            and a.funcCode=#funcCode#
+        </dynamic-field>
+        <dynamic-field property="menuCode">
+            and a.menuCode=#menuCode#
+        </dynamic-field>
+    </statement>
+	
+    <!-- query role user -->
+    <statement id="listNoOwnerUser">
+        from TPrivilegeUser u
+        where not exists (from TPrivilegeRoleLink r
+            where r.linkId=u.userId and r.roleId = #roleId# and r.linkType='user'
+        )
+        <dynamic-field property="userName">
+            and u.userName like #userName#
+        </dynamic-field>
+        order by u.userName
+    </statement>
+    
+    <statement id="listOwnerUser">
+        from TPrivilegeUser u
+        where exists (from TPrivilegeRoleLink r
+            where r.linkId=u.userId and r.roleId = #roleId# and r.linkType='user'
+        )
+        <dynamic-field property="userName">
+            and u.userName like #userName#
+        </dynamic-field>
+        order by u.userName
+    </statement>
+    
+    <!-- query user role -->
+    <statement id="listNoOwnerRole">
+        from TPrivilegeRole a
+        where not exists (from TPrivilegeRoleLink r
+            where r.roleId=a.roleId and r.linkId = #userId# and r.linkType='user'
+        )
+        <dynamic-field property="roleName">
+            and a.roleName like #roleName#
+        </dynamic-field>
+        order by a.roleName
+    </statement>
+    
+    <statement id="listOwnerRole">
+        from TPrivilegeRole a
+        where exists (from TPrivilegeRoleLink r
+            where r.roleId=a.roleId and r.linkId = #userId# and r.linkType='user'
+        )
+        <dynamic-field property="roleName">
+            and a.roleName like #roleName#
+        </dynamic-field>
+        order by a.roleName
+    </statement>
+    
+    <statement id="listGroupUser">
+        from TPrivilegeUser u
+        where exists (from TPrivilegeGroupUser r
+            where r.userId=u.userId and r.groupId = #groupId#
+        )
+        <dynamic-field property="userName">
+            and u.userName like #userName#
+        </dynamic-field>
+        order by u.userName
+    </statement>
+    
+    <statement id="listNoGroupUser">
+        from TPrivilegeUser u
+        where not exists (from TPrivilegeGroupUser r
+            where r.userId=u.userId and r.groupId = #groupId#
+        )
+        <dynamic-field property="userName">
+            and u.userName like #userName#
+        </dynamic-field>
+        order by u.userName
+    </statement>
+    
+    <statement id="listOwnerGroup">
+        from TPrivilegeGroup a
+        where exists (from TPrivilegeGroupUser r
+            where r.groupId=a.groupId and r.userId = #userId#
+        )
+        <dynamic-field property="groupName">
+            and a.groupName like #groupName#
+        </dynamic-field>
+        <dynamic-field property="groupEname">
+            and a.groupEname like #groupEname#
+        </dynamic-field>
+        order by a.groupName
+    </statement>
+    <!-- query user-role-group end -->
+    
+    <statement id="deleteUserGroupLink">
+        delete from TPrivilegeGroupUser 
+        where 1=1
+        <dynamic-field property="groupId">
+            and groupId = #groupId#
+        </dynamic-field>
+        <dynamic-field property="userId">
+            and userId = #userId#
+        </dynamic-field>
+    </statement>
+    
+    <statement id="deleteRoleLink">
+        delete from TPrivilegeRoleLink r
+        where 1=1
+        <dynamic-field property="roleId">
+            and r.roleId = #roleId#
+        </dynamic-field>
+        <dynamic-field property="linkId">
+            and r.linkId = #linkId#
+        </dynamic-field>
+        <dynamic-field property="linkType">
+            and r.linkType = #linkType#
+        </dynamic-field>
+    </statement>
+    
+    <!-- Cascades down the group to find its user -->
+    <statement id="listGroupUserCascade">
+     with recursive n(group_id) as 
+     (
+       select p.group_id from t_privilege_group p where p.group_id = #groupId#
+       union all
+       select q.group_id from n,t_privilege_group q where n.group_id=q.parent_group_id
+     ) 
+     select distinct u.* 
+     from T_Privilege_User u, T_Privilege_Group_User r
+     where u.user_id = r.user_id
+     and r.group_id in (select group_id from n);
+        <dynamic-field property="userName">
+            and u.user_Name like #userName#
+        </dynamic-field>
+    </statement>
+    
+</ns:hibernate>

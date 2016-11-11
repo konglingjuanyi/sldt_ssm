@@ -1,0 +1,13 @@
+/*form表单行间距*/
+.form-horizontal .control-group{
+    margin-bottom: 10px;
+}
+.form-horizontal .controls{
+    margin-left: 0px;
+}
+.ui-jqgrid-btable{
+    width:160px !important;
+}
+.ui-jqgrid-htable{
+    width:160px !important;
+}

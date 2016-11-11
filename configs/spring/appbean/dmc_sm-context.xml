@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/aop  
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+        http://www.springframework.org/schema/tx  
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="smSpringIntegrationBean" class="com.sldt.mds.dmc.sm.uitl.SmSpringIntegrationBean"/>
+
+	<!-- DAO类 -->
+	<bean id="userDao" class="com.sldt.mds.dmc.sm.dao.imp.UserDaoImp" parent="baseDao"/>
+		
+	<bean id="roleDao" class="com.sldt.mds.dmc.sm.dao.imp.RoleDaoImp" parent="baseDao"/>
+	
+	<bean id="menuDao" class="com.sldt.mds.dmc.sm.dao.imp.MenuDaoImp" parent="baseDao"/>
+	
+	<bean id="privlgDao" class="com.sldt.mds.dmc.sm.dao.imp.PrivlgDaoImp" parent="baseDao"/>
+	
+	<bean id="btnDao" class="com.sldt.mds.dmc.sm.dao.imp.BtnDaoImp" parent="baseDao"/>
+	
+	<bean id="orgDao" class="com.sldt.mds.dmc.sm.dao.imp.OrgDaoImp" parent="baseDao"/>
+	
+	<bean id="privCateDao" class="com.sldt.mds.dmc.sm.dao.imp.PrivCateDaoImp" parent="baseDao"/>
+	
+	<bean id="userPrivRtDao" class="com.sldt.mds.dmc.sm.dao.imp.UserPrivRtDaoImp" parent="baseDao"/>
+	
+	<bean id="sysDao" class="com.sldt.mds.dmc.sm.dao.imp.SystemDaoImpl" parent="baseDao"/>
+	
+	<bean id="TSmManaOrgDao" class="com.sldt.mds.dmc.sm.dao.imp.TSmManaOrgDaoImpl" parent="baseDao"/>
+		
+	<!-- Service类 -->
+	<bean id="userService" class="com.sldt.mds.dmc.sm.service.imp.UserServiceImp">   
+    	<property name="userDao" ref="userDao" />
+    	<property name="privlgDao" ref="privlgDao" />
+    	<property name="roleDao" ref="roleDao" />
+    	<property name="menuDao" ref="menuDao" />
+    	<property name="btnDao" ref="btnDao" />
+    	<property name="userPrivRtService" ref="userPrivRtService" />
+    	<property name="userPrivRtDao" ref="userPrivRtDao" />
+    </bean> 
+
+	<bean id="roleService" class="com.sldt.mds.dmc.sm.service.imp.RoleServiceImp">   
+    	<property name="roleDao" ref="roleDao" />
+    	<property name="privlgDao" ref="privlgDao" />
+    </bean> 
+    
+    <bean id="menuService" class="com.sldt.mds.dmc.sm.service.imp.MenuServiceImp">   
+    	<property name="menuDao" ref="menuDao" />
+    	<property name="privlgDao" ref="privlgDao" />
+    </bean> 
+    
+	<bean id="privlgService" class="com.sldt.mds.dmc.sm.service.imp.PrivlgServiceImp">   
+    	<property name="privlgDao" ref="privlgDao" />
+    </bean>
+    
+    <bean id="btnService" class="com.sldt.mds.dmc.sm.service.imp.BtnServiceImp">   
+    	<property name="btnDao" ref="btnDao" />
+    	<property name="privlgDao" ref="privlgDao" />
+    </bean>
+    
+    <bean id="orgService" class="com.sldt.mds.dmc.sm.service.imp.OrgServiceImp">   
+    	<property name="orgDao" ref="orgDao" />
+    	<property name="userDao" ref="userDao" />
+    	<property name="TSmManaOrgDao" ref="TSmManaOrgDao" />
+    </bean>
+    
+    <bean id="privCateService" class="com.sldt.mds.dmc.sm.service.imp.PrivCateServiceImp">   
+    	<property name="privCateDao" ref="privCateDao" />
+    </bean>
+    
+    
+    <bean id="sysService" class="com.sldt.mds.dmc.sm.service.imp.SystemServiceImp">
+        <property name="sysDao" ref="sysDao"/>
+    </bean>
+    
+    <bean id="manaOrgService" class="com.sldt.mds.dmc.sm.service.imp.ManaOrgServiceImpl">
+    	<property name="manaOrgDao" ref="manaOrgDao"/>
+    </bean>
+    <bean id="TSmManaOrgService" class="com.sldt.mds.dmc.sm.service.imp.TSmManaOrgServiceImpl">
+    	<property name="TSmManaOrgDao" ref="TSmManaOrgDao"/>
+    </bean>
+    <bean id="manaOrgDao" class="com.sldt.mds.dmc.sm.dao.imp.ManaOrgDaoImpl"/>
+    
+    <bean id="userRoleDao" class="com.sldt.dmc.sm.dao.impl.UserRoleDaoImpl" parent="baseDao"/>
+    
+    <bean id="ssmRestDao" class="com.sldt.mds.dmc.sm.rest.dao.impl.SsmRestDaoImpl" parent="baseDao"/>
+    
+    <bean id="userRoleService" class="com.sldt.dmc.sm.service.impl.UserRoleServiceImpl">
+    	<property name="userRoleDao" ref="userRoleDao"/>
+    </bean>
+    
+</beans>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.mds.dmc.sm.entity.TSmPriv"
+		table="T_SM_PRIV" lazy="true" batch-size="20">
+		<id name="privId" type="java.lang.String">
+			<column name="PRIV_ID" length="64" />
+			<generator class="assigned" />
+		</id>
+		<property name="privName" type="java.lang.String">
+			<column name="PRIV_NAME" length="64" />
+		</property>
+		<property name="privDesc" type="java.lang.String">
+			<column name="PRIV_DESC" length="240" />
+		</property>
+		<property name="memo" type="java.lang.String">
+			<column name="MEMO" length="240" />
+		</property>
+		<property name="privType" type="integer">
+			<column name="PRIV_TYPE" />
+		</property>
+		<property name="cateId" type="java.lang.String">
+			<column name="CATE_ID" length="32" />
+		</property>
+		<property name="pPrivId" type="java.lang.String">
+			<column name="P_PRIV_ID" length="64" />
+		</property>
+		<property name="createDt" type="java.lang.String">
+			<column name="CREATE_DT" length="8" />
+		</property>
+		<property name="privStat" type="java.lang.String">
+			<column name="PRIV_STAT" length="1" />
+		</property>
+	</class>
+</hibernate-mapping>

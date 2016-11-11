@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.mds.dmc.sm.entity.TSmUserLogonLog"
+		table="T_SM_USER_LOGON_LOG" lazy="true" batch-size="20">
+		<id name="logonLogId" type="java.lang.String">
+			<column name="LOGON_LOG_ID" length="32" />
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="java.lang.String">
+			<column name="USER_ID" length="32" />
+		</property>
+		<property name="logonInd" type="java.lang.String">
+			<column name="LOGON_IND" length="1" />
+		</property>
+		<property name="logonDt" type="timestamp">
+			<column name="LOGON_DT" />
+		</property>
+		<property name="logonFailReason" type="java.lang.String">
+			<column name="LOGON_FAIL_REASON" length="255" />
+		</property>
+		<property name="memo" type="java.lang.String">
+			<column name="MEMO" length="255" />
+		</property>
+	</class>
+</hibernate-mapping>

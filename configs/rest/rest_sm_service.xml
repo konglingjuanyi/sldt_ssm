@@ -1,0 +1,48 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util" xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:cxf="http://cxf.apache.org/core" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
+<import resource="classpath:META-INF/cxf/cxf.xml"/>
+<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+     <jaxrs:server id="restSsmService" address="/ssm">
+        <jaxrs:serviceBeans>
+            <ref bean="restSsmServiceBean"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+           <ref bean="jsonProvider"/>
+           <ref bean="jaxbProvider"/>
+           <bean class="org.apache.cxf.jaxrs.provider.jsonp.JsonpPreStreamInterceptor"/>
+        </jaxrs:providers>
+        <jaxrs:inInterceptors>
+    		<bean class="org.apache.cxf.jaxrs.provider.jsonp.JsonpInInterceptor"/>
+  		</jaxrs:inInterceptors>
+  		<jaxrs:outInterceptors>
+    		<bean class="org.apache.cxf.jaxrs.provider.jsonp.JsonpPostStreamInterceptor"/>
+  		</jaxrs:outInterceptors>
+      </jaxrs:server>
+       
+       <bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
+	   </bean>
+		
+      <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider"/>	  
+
+      <bean id="restSsmServiceBean" class="com.sldt.mds.dmc.sm.rest.service.impl.SsmRestServiceImpl"/> 
+      
+      <!-- 流程管理rest接口 -->
+       <jaxrs:server id="activitiRestService" address="/activiti">
+        <jaxrs:serviceBeans>
+            <ref bean="activitiRestBean"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+           <ref bean="jsonProvider"/>
+           <ref bean="jaxbProvider"/>
+           <bean class="org.apache.cxf.jaxrs.provider.jsonp.JsonpPreStreamInterceptor"/>
+        </jaxrs:providers>
+        <jaxrs:inInterceptors>
+    		<bean class="org.apache.cxf.jaxrs.provider.jsonp.JsonpInInterceptor"/>
+  		</jaxrs:inInterceptors>
+  		<jaxrs:outInterceptors>
+    		<bean class="org.apache.cxf.jaxrs.provider.jsonp.JsonpPostStreamInterceptor"/>
+  		</jaxrs:outInterceptors>
+      </jaxrs:server>
+      <bean id="activitiRestBean" class="com.sldt.activiti.process.rest.impl.ActivitiRestServiceImpl"/>
+       
+</beans>

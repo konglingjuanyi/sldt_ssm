@@ -1,0 +1,71 @@
+.alert {
+  padding: 5px 5px 8px 5px;
+  margin-bottom: 5px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+  background-color: #F9F9F9;
+  border: 1px solid #fbeed5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.baseInfo{
+	padding: 5px 20px 3px 20px;
+}
+.basetitle {
+  padding: 0px 5px 0px 0px;
+  height: 30px;
+  background-color: rgb(249, 249, 249);
+  border-bottom:1px solid #FEB480;
+}
+.bftitle{
+  padding: 5px 20px 5px 5px;
+  /* margin-top: 20px; */
+  font-size: 14px;
+  background-color: #CBCCCC;
+  font-weight: bold;
+  color: #203769;
+  float: left;
+}
+.infoContent{
+	border-bottom:1px dashed #ccc;
+	padding-top: 5px;
+	margin-left: 20px;
+} 
+.le1{
+  font-size: 12px;
+  font-weight: bold;
+  color: #999999;
+  width: 50%;
+}
+.le2{
+  font-size: 12px;
+  font-weight: bold;
+  color: #999999;
+  width: 50%;
+  float: right;
+}
+
+.ctab{
+    padding: 5px 20px 3px 20px;
+}
+
+.nav {
+  margin-bottom: 1px; 
+  margin-left: 0;
+  list-style: none;
+}
+
+.ui-jqgrid .ui-userdata {
+  border-left: 0 none;
+  border-right: 0 none;
+  height: 30px;
+  overflow: hidden;
+  background-color: rgb(249, 249, 249);
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #8B7942;
+  background-color: rgb(230, 230, 232);
+  border: 1px solid #C8BEBE;
+}
+

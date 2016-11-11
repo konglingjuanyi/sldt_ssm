@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:hibernate xmlns:ns="http://www.sldt.mds.com/xml/ns/j2ee/hibernate"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   xsi:schemaLocation="http://www.sldt.mds.com/xml/ns/j2ee/hibernate LTHibernateSchema.xsd">
+	
+	
+	<statement id="queryStatus">
+	SELECT IS_DAP_STS FROM t_sm_org_info    
+	WHERE 1=1 
+    <dynamic-field property="orgId">
+		and ORG_ID=#orgId#
+    </dynamic-field>
+	</statement>
+	
+	
+	<statement id="updateStatus">
+	UPDATE t_sm_org_info SET IS_DAP_STS=#status# WHERE ORG_ID =#orgId#
+	</statement>
+		
+	
+</ns:hibernate>

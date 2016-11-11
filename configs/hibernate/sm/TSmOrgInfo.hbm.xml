@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.mds.dmc.sm.entity.TSmOrgInfo"
+		table="T_SM_ORG_INFO" lazy="true" batch-size="20">
+		<id name="orgId" type="java.lang.String">
+			<column name="ORG_ID" length="64" />
+			<generator class="assigned" />
+		</id>
+		<property name="pOrgId" type="java.lang.String">
+			<column name="P_ORG_ID" length="64" />
+		</property>
+		<property name="orgLevel" type="java.lang.String">
+			<column name="ORG_LEVEL" length="8" />
+		</property>
+		<property name="orgShName" type="java.lang.String">
+			<column name="ORG_SHNAME" length="180" />
+		</property>
+		<property name="orgName" type="java.lang.String">
+			<column name="ORG_NAME" length="240" />
+		</property>
+		<property name="zipCd" type="java.lang.String">
+			<column name="ZIP_CD" length="6" />
+		</property>
+		<property name="orgAddr" type="java.lang.String">
+			<column name="ORG_ADDR" length="180" />
+		</property>
+		<property name="meno" type="java.lang.String">
+			<column name="MEMO" length="180" />
+		</property>
+		<property name="orgStat" type="integer">
+			<column name="ORG_STAT" />
+		</property>
+		<property name="syncDt" type="timestamp">
+			<column name="SYNC_DT" />
+		</property>
+		<property name="lastUpdateDt" type="java.lang.String">
+			<column name="LAST_UPDATE_DT" length="28" />
+		</property>
+	</class>
+</hibernate-mapping>

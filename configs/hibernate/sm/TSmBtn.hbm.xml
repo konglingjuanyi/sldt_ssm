@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.mds.dmc.sm.entity.TSmBtn"
+		table="T_SM_BTN" lazy="true" batch-size="20">
+		<id name="btnId" type="java.lang.String">
+			<column name="BTN_ID" length="16" />
+			<generator class="assigned" />
+		</id>
+		<property name="btnText" type="java.lang.String">
+			<column name="BTN_TEXT" length="32" />
+		</property>
+		<property name="btnNickname" type="java.lang.String">
+			<column name="BTN_NICKNAME" length="64" />
+		</property>
+		<property name="btnDesc" type="java.lang.String">
+			<column name="BTN_DESC" length="64" />
+		</property>
+		<property name="menuId" type="java.lang.String">
+			<column name="MENU_ID" length="16" />
+		</property>
+		<property name="btnType" type="java.lang.String">
+			<column name="BTN_TYPE" length="2" />
+		</property>
+		<property name="btnIcon" type="java.lang.String">
+			<column name="BTN_ICON" length="64" />
+		</property>
+		<property name="btnAct" type="java.lang.String">
+			<column name="BTN_ACT" length="64" />
+		</property>
+	</class>
+</hibernate-mapping>

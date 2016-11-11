@@ -1,0 +1,16 @@
+.span2 {
+  width: 85px;
+}
+
+.contentArea {
+  height: 70%;
+  min-height: 400px;
+}
+
+.classMappingTb{
+    border: 1px solid #617775;
+    background-color: #FDFBFB;
+    max-height: 440px;
+    overflow: auto;
+    z-index: 999;
+}

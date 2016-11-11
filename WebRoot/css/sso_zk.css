@@ -1,0 +1,105 @@
+/* CSS Document */
+
+html, body{
+	text-align:center;
+	height: 100%;
+	padding:0;
+	margin:0;
+	font-family:Arial, Helvetica, sans-serif;
+	background: url(../images/login_bg_zk.jpg) top center #003f8d;
+}
+div, h1, h2, h3, h4, p, form, label, input, textarea, img, span{
+	margin:0; padding:0;
+}
+
+ul{
+	margin:0; 
+	padding:0; 
+	list-style-type:none;
+	font-size:0;
+}
+.spacer{
+	clear:both; 
+	font-size:0; 
+	line-height:0;
+}
+/*------------------------------------------------login--------------------*/
+#loginMain_zk{
+	height:auto;
+	width:100%;
+	background: url(../images/login_bg_zk.jpg) top center #003f8d;
+}	 
+#loginMid_zk{
+    margin:0 auto;  
+	width:1024px;
+	height:600px;
+	background: url(../images/login_mid_zkuser.png) no-repeat 0 0;
+}
+#member{
+	width:737px; 
+	margin-left:287px;
+}
+#member form{
+	
+	display:inherit;
+	padding-left:248px;
+	padding-top:313px;
+	width:272px;
+	height:180px;
+	float:left;
+}
+#member form input.txtBox1{
+	text-align:left;
+	*width:195px!important;
+	width:225px;
+	height:30px;
+	border:#bdbdbd solid 1px;
+	background:url(../images/input_use.png) no-repeat;
+	float:left;
+	margin-bottom:22px;
+	padding-left:33px;
+	font:bold 14px/30px Arial, Helvetica, sans-serif;
+}
+#member form input.txtBox2{
+	text-align:left;
+	*width:195px!important;
+	width:225px;
+	height:30px;
+	border:#bdbdbd solid 1px;
+	background:url(../images/input_post.png) no-repeat;
+	float:left;
+	margin-bottom:22px;
+	padding-left:33px;
+	font:bold 14px/30px Arial, Helvetica, sans-serif;
+}
+#member form input.txtBox3{
+	text-align:left;
+	*width:195px!important;
+	width:225px;
+	height:30px;
+	border:#bdbdbd solid 1px;
+	background:url(../images/input_use_group.png) no-repeat;
+	float:left;
+	padding-left:33px;
+	font:bold 14px/30px Arial, Helvetica, sans-serif;
+}
+
+#member form p.btnLogin{
+	width:117px;
+	height:32px;
+	float:left;
+	margin-top:22px;
+	margin-left:50px;
+}
+#member form p.btnLogin a{
+	display:block;
+	font-size:0;
+	line-height:0;
+	border:none;
+	background:url(../images/btn_login.png) 0 0 no-repeat;
+	width:117px;
+	height:32px;
+}
+#member form p.btnLogin a:hover{
+	background:url(../images/btn_loginhover.png) 0 0 no-repeat;
+}

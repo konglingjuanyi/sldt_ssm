@@ -1,0 +1,34 @@
+<project name="ssm" basedir="." default="buildEar">
+	<property name="companyName" value="ccb"/>
+	<property name="ProjectCode" value="ssm"/>
+	<property name="war.dir" value="WebRoot" />
+	<property name="build.dir" value="ear.build" />
+	<property name="release.dir" value="D:/ccb_war/20160417" />
+	<property name="application.dir" value="application" />
+	<target name="splash" description="Display the logo">
+			<property name="splash.dir" location="."/>
+			<splash imageurl="file:${splash.dir}/pactera.png" showduration="0"/>
+	</target>
+	<target name="war" depends="splash" >
+		<mkdir dir="${build.dir}"  />
+		<war basedir="${war.dir}" webxml="${war.dir}/WEB-INF/web.xml" warfile="${build.dir}/${companyName}_${ProjectCode}.war">
+			<include name="**/*"/>
+		</war>
+		<copy todir="${release.dir}">
+			<fileset dir="${build.dir}">
+				<include name="${companyName}_${ProjectCode}.war" />
+			</fileset>
+		</copy>
+    </target>
+	<target name="buildEar" depends="war">
+		<!--<copy tofile="${build.dir}/META-INF/application.xml" file="${application.dir}/application.xml"/>
+		<copy tofile="${build.dir}/META-INF/weblogic-application.xml" file="${application.dir}/weblogic-application.xml"/>-->
+	    <jar jarfile="${release.dir}/${companyName}_${ProjectCode}.ear" basedir="${build.dir}">
+	        <manifest>
+	            <attribute name="Implementation-Vendor"  value="${companyName}"/>
+	            <attribute name="Implementation-Title"   value="${ProjectCode}"/>
+	            <attribute name="Implementation-Version" value="1.0"/>
+	        </manifest>     
+	    </jar>
+	</target>
+</project>

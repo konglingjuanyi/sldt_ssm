@@ -1,0 +1,12 @@
+.leftTree{
+    width: 400px;
+    display: inline;
+}
+.privDiv{
+	folat:left;
+	display: inline;
+}
+.contentArea {
+  height: 70%;
+  min-height: 390px;
+}

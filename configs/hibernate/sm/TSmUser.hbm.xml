@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.mds.dmc.sm.entity.TSmUser"
+		table="T_SM_USER" lazy="true" batch-size="20">
+		<id name="userId" type="java.lang.String">
+			<column name="USER_ID" length="32" />
+			<generator class="assigned" />
+		</id>
+		<property name="orgId" type="java.lang.String">
+			<column name="ORG_ID" length="64" />
+		</property>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" length="180" />
+		</property>
+		<property name="certType" type="java.lang.String">
+			<column name="CERT_TYPE" length="1" />
+		</property>
+		<property name="certNum" type="java.lang.String">
+			<column name="CERT_NUM" length="20" />
+		</property>
+		<property name="orgNum" type="java.lang.String">
+			<column name="ORG_NUM" length="64" />
+		</property>
+		<property name="userStat" type="java.lang.String">
+			<column name="USER_STAT" length="1" />
+		</property>
+		<property name="startDt" type="java.lang.String">
+			<column name="START_DT" length="8" />
+		</property>
+		<property name="endDt" type="java.lang.String">
+			<column name="END_DT" length="8" />
+		</property>
+		<property name="logonPwd" type="java.lang.String">
+			<column name="LOGON_PWD" length="64" />
+		</property>
+		<property name="contTel" type="java.lang.String">
+			<column name="CONT_TEL" length="16" />
+		</property>
+		<property name="contEmail" type="java.lang.String">
+			<column name="CONT_EMAIL" length="60" />
+		</property>
+		<property name="syncDt" type="timestamp">
+			<column name="SYNC_DT" />
+		</property>
+		<property name="lastUpdateDt" type="java.lang.String">
+			<column name="LAST_UPDATE_DT" length="28" />
+		</property>
+	</class>
+</hibernate-mapping>

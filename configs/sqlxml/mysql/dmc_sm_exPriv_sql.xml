@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:hibernate xmlns:ns="http://www.sldt.mds.com/xml/ns/j2ee/hibernate"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   xsi:schemaLocation="http://www.sldt.mds.com/xml/ns/j2ee/hibernate LTHibernateSchema.xsd">
+	
+	
+	<statement id="queryExPriv">
+	SELECT 
+		 priv_id,
+		 priv_name,
+		 p_priv_id
+		
+	FROM   t_sm_priv    
+	WHERE 1=1 
+    <dynamic-field property="pid">
+		and p_priv_id=#pid#
+    </dynamic-field>
+   
+	</statement>
+		
+	
+	
+</ns:hibernate>

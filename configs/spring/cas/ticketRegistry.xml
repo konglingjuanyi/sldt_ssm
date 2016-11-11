@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <description>
+    	Configuration for the default TicketRegistry which stores the tickets in-memory and cleans them out as specified intervals.
+    </description>
+       
+     <!-- Ticket Registry -->
+    <!--
+	<bean id="ticketRegistry" class="org.jasig.cas.ticket.registry.DefaultTicketRegistry" />
+	-->
+		<bean id="ticketRegistry" class="org.jasig.cas.ticket.registry.JBossCacheTicketRegistry">
+			<property name="cache" ref="cache"/>
+		</bean>
+		
+		<bean id="cache" class="org.jasig.cas.util.JBossCacheFactoryBean">
+			<property name="configLocation" value="classpath:jbossTicketCacheReplicationConfig.xml"/>
+	    </bean>
+	  	
+	<!--Quartz -->
+	<!-- TICKET REGISTRY CLEANER -->
+	<bean id="ticketRegistryCleaner" class="org.jasig.cas.ticket.registry.support.DefaultTicketRegistryCleaner"
+		p:ticketRegistry-ref="ticketRegistry"
+		p:logoutManager-ref="logoutManager" />
+	
+	<bean id="jobDetailTicketRegistryCleaner" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="ticketRegistryCleaner"
+		p:targetMethod="clean" />
+	
+	<!-- quartz版本升级需要改造 先注销 -->
+<!-- 	
+	<bean id="triggerJobDetailTicketRegistryCleaner" class="org.springframework.scheduling.quartz.SimpleTriggerBean"
+		p:jobDetail-ref="jobDetailTicketRegistryCleaner"
+		p:startDelay="20000"
+		p:repeatInterval="5000000" />
+-->		
+</beans>

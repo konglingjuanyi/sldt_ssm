@@ -1,0 +1,6 @@
+1、在目录下：C:\Windows\System32\drivers\etc 的hosts文件中设置
+	127.0.0.1 dmp.hz.cn
+
+2、admin/123456
+
+3、http://dmp.hz.cn:8080/ssm/smFrame.do?method=sysMgrMain

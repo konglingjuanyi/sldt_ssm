@@ -1,0 +1,93 @@
+
+
+/*----------��ʼloginҳ����ʽ---------------*/
+*{margin:0;padding:0;}
+body{
+	background-color:#eee;
+}
+#contaniner{
+	width: 100%;
+	height: 100%;
+	background:url(../../../public/login/img/content-bg.jpg) no-repeat 0 100%;
+	position:absolute;
+	top:0;
+	left:0;
+	bottom:0;
+
+}
+#login-logo{
+	width:456px;
+	height:70px;
+	border:0;
+	float:right;
+	margin-top:130px;
+	margin-right:160px;
+}
+#login-logo a, #login-logo img{
+	display:block;
+	vertical-align:middle;
+	margin: 0 auto;
+	border:0;
+}
+#main-content{
+	width:456px; 
+	height:346px; 
+	display:block;
+	position:absolute;
+	right:160px;
+	top:200px;
+	background:url(../../../public/login/img/login-aontent.png) no-repeat;
+}
+.centertable {
+	margin: 0 auto;
+	text-align: center;
+	padding:80px 0 0 60px;
+}
+.errorMessage{
+	display:inline-block;
+	padding-left:2px;
+	height:25px;
+	color:#f00;
+}
+.content {
+	font: normal 14px/40px "Microsoft YaHei";
+	position: relative;
+	margin:0;
+	margin-left:0!important;
+}
+.content tr td{
+	line-height:25px;
+	padding:0;
+	padding:left;
+	font: 16px/35px "Microsoft YaHei";
+	
+	}
+.content tr td span{
+	line-height:50px;
+}
+.btn, .btn-over{
+	font: 18px/35px "Microsoft YaHei";
+ 	width:150px;
+ 	border:0;
+	border-radius: 5px;
+ 	height:35px;
+	line-height: 35px;	
+  	color:#fff; 
+  	padding: 0 7px 0;
+  	cursor:pointer;
+}
+.btn{
+	background:#4855db; 
+}
+.btn-over{
+	background:#6673f6;
+ }
+#footer{
+	font: normal 14px/40px "Microsoft YaHei";
+	width:100%;
+	text-align:center;
+	color:#96b3e9;	
+	position: absolute;
+	left:0;
+	bottom:7px;
+}

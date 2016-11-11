@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.mds.dmc.sm.entity.TSmMetaPrivCfg"
+		table="T_SM_META_PRIV_CFG" lazy="true" batch-size="20">
+		<id name="privId" type="java.lang.String">
+			<column name="PRIV_ID" length="64" />
+			<generator class="assigned" />
+		</id>
+		<property name="instId" type="java.lang.String">
+			<column name="INST_ID" length="32" />
+		</property>
+		<property name="namespace" type="java.lang.String">
+			<column name="NAMESPACE" length="1000" />
+		</property>
+		<property name="actType" type="java.lang.String">
+			<column name="ACT_TYPE" length="32" />
+		</property>
+		<property name="userId" type="java.lang.String">
+			<column name="USER_ID" length="32" />
+		</property>
+		<property name="roleId" type="java.lang.String">
+			<column name="ROLE_ID" length="32" />
+		</property>
+	</class>
+</hibernate-mapping>

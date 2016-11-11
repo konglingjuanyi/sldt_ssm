@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.activiti.process.domain.WfReTaskOper" table="t_wf_re_task_oper" lazy="true" batch-size="20">
+        <id name="taskOperId" type="java.lang.String">
+            <column name="task_oper_id" length="64" />
+            <generator class="assigned"></generator>
+        </id>
+        
+        <property name="taskId" type="java.lang.String">
+            <column name="task_id" length="64"/>
+        </property>
+        
+		<property name="operType" type="java.lang.String">
+            <column name="oper_type" length="2" />
+        </property>
+        
+		<property name="userId" type="java.lang.String">
+            <column name="user_id" length="64" />
+        </property>
+        
+		<property name="userName" type="java.lang.String">
+            <column name="user_name" length="128" />
+        </property>
+        
+        <property name="groupId" type="java.lang.String">
+            <column name="group_id" length="64" />
+        </property>
+        
+        <property name="groupName" type="java.lang.String">
+            <column name="group_name" length="128" />
+        </property>
+        
+        <property name="createdBy" type="java.lang.String">
+            <column name="created_by" length="100" />
+        </property>
+        
+        <property name="dateCreated" type="java.lang.String">
+            <column name="date_created" length="30" />
+        </property>
+        
+        <property name="updatedBy" type="java.lang.String">
+            <column name="updated_by" length="100" />
+        </property>
+        <property name="dateUpdated" type="java.lang.String">
+            <column name="date_updated" length="30" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

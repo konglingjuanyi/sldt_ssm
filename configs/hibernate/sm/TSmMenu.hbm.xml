@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.mds.dmc.sm.entity.TSmMenu"
+		table="T_SM_MENU" lazy="true" batch-size="20">
+		<id name="menuId" type="java.lang.String">
+			<column name="MENU_ID" length="16" />
+			<generator class="assigned" />
+		</id>
+		<property name="menuName" type="java.lang.String">
+			<column name="MENU_NAME" length="32" />
+		</property>
+		<property name="menuType" type="java.lang.String">
+			<column name="MENU_TYPE" length="2" />
+		</property>
+		<property name="menuDesc" type="java.lang.String">
+			<column name="MENU_DESC" length="512" />
+		</property>
+		<property name="menuLevel" type="java.lang.String">
+			<column name="MENU_LEVEL" length="8" />
+		</property>
+		<property name="menuUrl" type="java.lang.String">
+			<column name="MENU_URL" length="512" />
+		</property>
+		<property name="menuOrder" type="integer">
+			<column name="MENU_ORDER" />
+		</property>
+		<property name="menuIcon" type="java.lang.String">
+			<column name="MENU_ICON" length="64" />
+		</property>
+		<property name="pMenuId" type="java.lang.String">
+			<column name="P_MENU_ID" length="16" />
+		</property>
+		<property name="appId" type="java.lang.String">
+			<column name="APP_ID" length="16" />
+		</property>
+		<property name="menuParam1" type="java.lang.String">
+			<column name="MENU_PARAM1" length="64" />
+		</property>
+		<property name="menuParam2" type="java.lang.String">
+			<column name="MENU_PARAM2" length="64" />
+		</property>
+		<property name="menuParam3" type="java.lang.String">
+			<column name="MENU_PARAM3" length="2000" />
+		</property>
+	</class>
+</hibernate-mapping>

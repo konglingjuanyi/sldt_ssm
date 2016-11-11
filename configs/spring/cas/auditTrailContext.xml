@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+  <description>
+  Configuration file for the Inspektr package which handles auditing for Java applications.
+  If enabled this should be modified to log audit and statistics information the same way
+  your local applications do.  The default is currently to log to the console which is good
+  for debugging/testing purposes.
+  </description>
+
+  <aop:aspectj-autoproxy/>
+  
+  <bean id="inspektrTransactionManager"
+    class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+    p:dataSource-ref="dataSource"
+  />
+ 
+  <bean id="inspektrTransactionTemplate"
+    class="org.springframework.transaction.support.TransactionTemplate"
+    p:transactionManager-ref="inspektrTransactionManager"
+    p:isolationLevelName="ISOLATION_READ_COMMITTED"
+    p:propagationBehaviorName="PROPAGATION_REQUIRED"
+    p:timeout="5"
+  />
+ 
+
+   <bean id="auditTrailManager" class="com.sldt.dmc.ssm.audit.JdbcAuditTrailManager">
+      <constructor-arg index="0" ref="inspektrTransactionTemplate" />
+      <property name="dataSource" ref="dataSource" />
+  </bean>
+  
+  <bean id="auditTrailManagementAspect" class="com.github.inspektr.audit.AuditTrailManagementAspect"
+    c:applicationCode="ssm" c:auditablePrincipalResolver-ref="auditablePrincipalResolver" 
+    c:auditTrailManagers-ref="auditTrailManagersList"
+    c:auditActionResolverMap-ref="auditActionResolverMap"
+    c:auditResourceResolverMap-ref="auditResourceResolverMap" />
+   <util:list id="auditTrailManagersList">
+     <ref bean="auditTrailManager" />
+     <ref bean="loggingAuditTrailManager" />
+   </util:list>
+   <util:map id="auditActionResolverMap">
+    <entry key="AUTHENTICATION_RESOLVER">
+      <ref local="authenticationActionResolver" />
+    </entry>
+    <entry key="CREATE_TICKET_GRANTING_TICKET_RESOLVER">
+      <ref local="ticketCreationActionResolver" />
+    </entry>
+    <entry key="DESTROY_TICKET_GRANTING_TICKET_RESOLVER">
+      <bean class="com.github.inspektr.audit.spi.support.DefaultAuditActionResolver" />
+    </entry>
+    <entry key="GRANT_SERVICE_TICKET_RESOLVER">
+      <ref local="ticketCreationActionResolver" />
+    </entry>
+    <entry key="GRANT_PROXY_GRANTING_TICKET_RESOLVER">
+      <ref local="ticketCreationActionResolver" />
+    </entry>
+    <entry key="VALIDATE_SERVICE_TICKET_RESOLVER">
+      <ref local="ticketValidationActionResolver" />
+    </entry>
+  </util:map>
+  
+  <util:map id="auditResourceResolverMap">
+    <entry key="AUTHENTICATION_RESOURCE_RESOLVER">
+      <bean class="org.jasig.cas.audit.spi.CredentialsAsFirstParameterResourceResolver" />
+    </entry>
+    <entry key="CREATE_TICKET_GRANTING_TICKET_RESOURCE_RESOLVER">
+      <ref local="returnValueResourceResolver" />
+    </entry>
+    <entry key="DESTROY_TICKET_GRANTING_TICKET_RESOURCE_RESOLVER">
+      <ref local="ticketResourceResolver" />
+    </entry>
+    <entry key="GRANT_SERVICE_TICKET_RESOURCE_RESOLVER">
+      <bean class="org.jasig.cas.audit.spi.ServiceResourceResolver" />
+    </entry>
+    <entry key="GRANT_PROXY_GRANTING_TICKET_RESOURCE_RESOLVER">
+      <ref local="returnValueResourceResolver" />
+    </entry>
+    <entry key="VALIDATE_SERVICE_TICKET_RESOURCE_RESOLVER">
+      <ref local="ticketResourceResolver" />
+    </entry>
+  </util:map>
+      
+  <bean id="auditablePrincipalResolver" class="org.jasig.cas.audit.spi.TicketOrCredentialPrincipalResolver"
+    c:ticketRegistry-ref="ticketRegistry" />
+
+  <bean id="authenticationActionResolver"
+    class="com.github.inspektr.audit.spi.support.DefaultAuditActionResolver"
+    c:successSuffix="_SUCCESS" c:failureSuffix="_FAILED" />
+  
+  <bean id="ticketCreationActionResolver"
+    class="com.github.inspektr.audit.spi.support.DefaultAuditActionResolver"
+    c:successSuffix="_CREATED" c:failureSuffix="_NOT_CREATED" />
+  
+  <bean id="ticketValidationActionResolver"
+    class="com.github.inspektr.audit.spi.support.DefaultAuditActionResolver"
+    c:successSuffix="D" c:failureSuffix="_FAILED" />
+  
+  <bean id="returnValueResourceResolver"
+     class="com.github.inspektr.audit.spi.support.ReturnValueAsStringResourceResolver" />
+     
+  <bean id="ticketResourceResolver"
+    class="org.jasig.cas.audit.spi.TicketAsFirstParameterResourceResolver" />
+    
+    
+    
+	<bean id="auditManager" class="com.sldt.dmc.ssm.audit.JdbcAuditTrailManager">
+	  <constructor-arg index="0" ref="inspektrTransactionTemplate" />
+	  <property name="dataSource" ref="dataSource" />
+	  <property name="cleanupCriteria" ref="auditCleanupCriteria" />
+	</bean>
+	<!--audit log reserve 60 days,other log archive to his table-->
+	<bean id="auditCleanupCriteria"
+	  class="com.github.inspektr.audit.support.MaxAgeWhereClauseMatchCriteria">
+	  <constructor-arg index="0" value="30" />
+	</bean>
+
+<!-- 
+  <bean id="auditCleanerJobDetail"
+    class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+    p:targetBeanName="auditManager"
+    p:targetMethod="clean"
+  />
+    
+  <bean id="auditCleanerTrigger"
+    class="org.springframework.scheduling.quartz.CronTriggerBean"
+    p:jobDetail-ref="auditCleanerJobDetail"
+    p:cronExpression="10 * * ? * *"
+  />
+   -->
+  
+  
+    <bean id="auditCleanjob" class="com.sldt.dmc.ssm.audit.task.AuditCleanTask">
+     </bean>
+  
+  <!-- 集群任务调度 -->
+    <!-- quartz升级，需要调整，先注销 -->
+    <!-- 
+	<bean id="auditCleanerJobDetail"  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	  <property name="targetObject"  ref="auditCleanjob" />
+	  <property name="targetMethod"  value="auditClean" />
+	  <property name="concurrent" value="false" />
+	  <property name="shouldRecover" value="true" />
+	</bean>
+	-->
+    <!-- 每天早上 8点5分启动任务 -->
+    <!-- quartz升级，需要调整，先注销 -->
+    <!-- 
+   <bean id="auditCleanerTrigger"  class="org.springframework.scheduling.quartz.CronTriggerBean">
+	    <property name="jobDetail"  ref="auditCleanerJobDetail" />
+	    <property name="cronExpression"  value="0/30 * * * * ?" />
+	</bean>
+   -->
+   <!--  <ref bean="clusterJobTrigger" />-->
+	<!-- <bean id="schedulerBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <property name="dataSource" ref="dataSource"/>  
+	    <property name="configLocation" value="classpath:quartz.properties" />
+	    <property name="triggers">
+	        <list>
+	            <ref bean="auditCleanerTrigger" />
+	        </list>
+	    </property>
+	</bean> -->
+    
+</beans>

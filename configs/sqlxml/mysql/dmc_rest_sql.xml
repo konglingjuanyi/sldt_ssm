@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:hibernate xmlns:ns="http://www.sldt.mds.com/xml/ns/j2ee/hibernate"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.sldt.mds.com/xml/ns/j2ee/hibernate LTHibernateSchema.xsd">
+    
+    <statement id="getDapDept"><!-- sm -->
+      select ORG_LEVEL,ORG_NAME,ORG_ID,P_ORG_ID from sm.t_sm_org_info where is_dap_sts = '1' ORDER BY ORG_NAME
+    </statement>
+    
+    </ns:hibernate>

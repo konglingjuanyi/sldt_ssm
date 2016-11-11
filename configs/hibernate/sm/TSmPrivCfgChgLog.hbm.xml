@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.mds.dmc.sm.entity.TSmPrivCfgChgLog"
+		table="T_SM_PRIV_CFG_CHG_LOG" lazy="true" batch-size="20">
+		<id name="acCfgSn" type="java.lang.String">
+			<column name="AC_CFG_SN" length="32" />
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="java.lang.String">
+			<column name="USER_ID" length="32" />
+		</property>
+		<property name="roleId" type="java.lang.String">
+			<column name="ROLE_ID" length="32" />
+		</property>
+		<property name="privId" type="java.lang.String">
+			<column name="PRIV_ID" length="64" />
+		</property>
+		<property name="orgId" type="java.lang.String">
+			<column name="ORG_ID" length="32" />
+		</property>
+		<property name="cfgType" type="java.lang.String">
+			<column name="CFG_TYPE" length="1" />
+		</property>
+		<property name="operType" type="java.lang.String">
+			<column name="OPER_TYPE" length="6" />
+		</property>
+		<property name="operDt" type="java.lang.String">
+			<column name="OPER_DT" length="16" />
+		</property>
+		<property name="operr" type="java.lang.String">
+			<column name="OPERR" length="16" />
+		</property>
+		<property name="memo" type="java.lang.String">
+			<column name="MEMO" length="64" />
+		</property>
+	</class>
+</hibernate-mapping>

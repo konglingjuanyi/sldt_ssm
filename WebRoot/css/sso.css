@@ -1,0 +1,196 @@
+/* CSS Document */
+
+html, body {
+	text-align: center;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	background:url(../images/bg.png) 0 0;
+	/*background-color: #f8f8f8;*/
+}
+div, h1, h2, h3, h4, p, form, label, input, textarea, img, span {
+	margin: 0;
+	padding: 0;
+}
+ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 0;
+}
+.spacer {
+	clear: both;
+	font-size: 0;
+	line-height: 0;
+}
+/*------------------------------------------------login--------------------*/
+#loginMain {
+	height: 100%;
+	width: 100%;
+	/*background-color: #f8f8f8;*/
+	background:url(../images/bg.png) 0 0;
+}
+#loginMid {
+	margin: 0 auto;
+	width: 1008px;
+	height: 627px;
+	background: url(../images/bg_mid.png) no-repeat 0 0;
+}
+#loginoutMid {
+	margin: 0 auto;
+	width: 1008px;
+	height: 627px;
+	background: url(../images/bgout_mid.png) no-repeat 0 0;
+}
+#member {
+	position: relative;
+	top: 175px;
+	width: 276px;
+	height: 452px;
+	float: left;
+	padding-left: 732px;
+}
+#member form {
+	padding-left: 16px;
+	width: 260px;
+	height: 282px;
+	float: left;
+}
+#member form input.txtBox1 {
+	text-align: left;
+ *width:215px!important;
+	width: 245px;
+	height: 40px;
+	background: url(../images/txtBox01.png) no-repeat;
+	float: left;
+	margin-bottom: 40px;
+	padding-left: 33px;
+	border: 0px solid;
+	font: bold 14px/40px Arial, Helvetica, sans-serif;
+}
+#member form input.txtBox2 {
+	text-align: left;
+ *width:215px!important;
+	width: 245px;
+	height: 40px;
+	background: url(../images/txtBox02.png) no-repeat;
+	float: left;
+	margin-bottom: 40px;
+	padding-left: 33px;
+	border: 0px solid;
+	font: bold 14px/40px Arial, Helvetica, sans-serif;
+}
+#member form p.btnLogin {
+	width: 108px;
+	height: 40px;
+	float: left;
+}
+#member form p.btnLogin a {
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	border: none;
+	background: url(../images/btn01.png) 0 0 no-repeat;
+	width: 108px;
+	height: 40px;
+}
+#member form p.btnLogin a:hover {
+	background: url(../images/btn01_hover.png) 0 0 no-repeat;
+}
+#member form p.btnReturn {
+	width: 108px;
+	height: 40px;
+	margin-left: 29px;
+	float: left;
+}
+#member form p.btnReturn a {
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	border: none;
+	background: url(../images/btn02.png) 0 0 no-repeat;
+	width: 108px;
+	height: 40px;
+}
+#member form p.btnReturn a:hover {
+	background: url(../images/btn02_hover.png) 0 0 no-repeat;
+}
+#member .info {
+	width: 276px;
+	height: 170px;
+	background: url(../images/infobg.png) 0 0 no-repeat;
+	float: left;
+}
+#member .info ul {
+	width: 276px;
+	height: 120px;
+	float: left;
+}
+#member .info ul li {
+	margin: 0 0 1px 0;
+	padding: 0;
+}
+#member .info ul li a {
+	display: block;
+	float: left;
+	width: 251px;
+	background: url(../images/arrow.png) 10px 15px no-repeat;
+	padding: 0 0 0 25px;
+	color: #fff;
+	height: 39px;
+	font: normal 12px/36px Arial, Helvetica, sans-serif;
+	text-align: left;
+	text-decoration: none;
+}
+#member .info ul li a:hover {
+	color:#940210;
+}
+
+#reTurn {
+	position: relative;
+	top: 316px;
+	width: 160px;
+	height:auto;
+	float: left;
+	padding-left: 827px;
+}
+#reTurn p.btnLoginout {
+	width: 108px;
+	height: 40px;
+	float: left;
+}
+#reTurn p.btnLoginout a {
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	border: none;
+	background: url(../images/btn01.png) 0 0 no-repeat;
+	width: 108px;
+	height: 40px;
+}
+#reTurn p.btnLoginout a:hover {
+	background: url(../images/btn01_hover.png) 0 0 no-repeat;
+}
+
+.errors_msg{
+	text-align:right; 
+	width:194px; 
+	color:#ba1021; 
+	font-size:12px; 
+}
+
+#contactInfo {
+	position: relative;
+	top: 140px;
+	width: 690px;
+	height: 40px;
+	float: left;
+	font-size:12px;
+	font-family:Verdana,宋体,san-serif;
+	font-weight:bold;
+	color:#4B4F50;
+	padding-left: 0px;
+	
+}
+

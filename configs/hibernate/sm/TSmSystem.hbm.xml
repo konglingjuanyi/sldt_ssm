@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name = "com.sldt.mds.dmc.sm.entity.TSmSystem" table="T_SM_SYSTEM" >
+      <id name = "appId" type = "java.lang.String">
+          <column name = "APP_ID" length="16"></column>
+      </id>
+      <property name ="appName" type="java.lang.String">
+          <column name = "APP_NAME" length="32"/>
+      </property>
+       <property name ="appDescribe" type="java.lang.String">
+          <column name = "APP_DESCRIBE" length="128"/>
+      </property>
+ </class>
+</hibernate-mapping>

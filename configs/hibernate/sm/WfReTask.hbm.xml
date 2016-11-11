@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.sldt.activiti.process.domain.WfReTask" table="t_wf_re_task" lazy="true" batch-size="20">
+        <id name="taskId" type="java.lang.String">
+            <column name="task_id" length="64" />
+            <generator class="assigned"></generator>
+        </id>
+        
+        <property name="procId" type="java.lang.String">
+            <column name="proc_id" length="64"/>
+        </property>
+        
+         <property name="actProcDefId" type="java.lang.String">
+            <column name="act_proc_def_id" length="64" />
+        </property>
+        
+        <property name="actId" type="java.lang.String">
+            <column name="act_id" length="255"/>
+        </property>
+        
+        <property name="actName" type="java.lang.String">
+            <column name="act_name" length="255" />
+        </property>
+        
+        <property name="actType" type="java.lang.String">
+            <column name="act_type" length="255" />
+        </property>
+        
+        <property name="operateType" type="java.lang.String">
+            <column name="operate_type" length="8" />
+        </property>
+        
+        <property name="orderIndex" type="int">
+            <column name="order_index"/>
+        </property>
+       
+        <property name="createdBy" type="java.lang.String">
+            <column name="created_by" length="100" />
+        </property>
+        
+        <property name="dateCreated" type="java.lang.String">
+            <column name="date_created" length="30" />
+        </property>
+        
+        <property name="updatedBy" type="java.lang.String">
+            <column name="updated_by" length="100" />
+        </property>
+        <property name="dateUpdated" type="java.lang.String">
+            <column name="date_updated" length="30" />
+        </property>
+        
+        <set name="taskOpers" inverse="true" lazy="true">
+            <key>
+                <column name="task_id" length="64" not-null="true" />
+            </key>
+            <one-to-many class="com.sldt.activiti.process.domain.WfReTaskOper" />
+        </set>
+    </class>
+</hibernate-mapping>

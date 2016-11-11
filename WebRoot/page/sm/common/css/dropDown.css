@@ -1,0 +1,15 @@
+.treeContent{
+    border: 1px solid #617775;
+    background-color: #FDFBFB;
+    max-height: 440px;
+    overflow: auto;
+    z-index: 999;
+}
+
+.gridContent{
+    border: 1px solid #617775;
+    background-color: #FDFBFB;
+    max-height: 440px;
+    overflow: auto;
+	z-index: 999;
+}

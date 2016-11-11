@@ -1,0 +1,222 @@
+@charset "utf-8";
+/* CSS Document */
+
+html, body {
+	height: 100%;
+    padding: 0;
+    margin: 0;
+	font-family:Verdana,宋体,san-serif;
+		background: url(images/bg_out.jpg) repeat-x;
+
+}
+body {
+			position: relative;
+		}
+div, h1, h2, h3, h4, p, form, label, input, textarea, img, span{
+	margin:0; padding:0;
+}
+
+.spacer{clear:both; font-size:0; line-height:0;}
+.clear { zoom:1; }
+.clear:after { content: '\20'; display: block; clear: both; }
+/*------------------------------------------------main--------------------*/
+
+/*----------------垂直外框样式【暂不用】------------------*/
+#outer{
+	height: 100%;    
+     overflow: hidden;    
+     position: relative;    
+     width: 100%;    
+     background:#b3b3b3;    
+     display:table;
+}
+
+#outer[id] {           
+     display: table;    
+     position: static;                  
+     *position:relative;                    
+     _position: static;    
+}    
+
+#middle {          
+     position: absolute;    
+     top: 50%;    
+     left: 0;    
+     vertical-align:middle;    
+     display:table-cell;    
+     width:100%;                  
+     *vertical-align:middle;    
+     *display:table-cell;    
+     *width:100%;                 
+     _vertical-align:;    
+     _display:;    
+     _width:;    
+}    
+#middle[id] {    
+       
+     display: table-cell;    
+     vertical-align: middle;    
+     position: static;    
+     top:50%;    
+     left:0;    
+     width:100%;                
+     *position:absolute;                  
+     _position: ;    
+}    
+
+/*----------------垂直外框样式【暂不用】------------------*/  
+.iner_out{
+	position: relative; 
+	/*top: -50%; */  
+    margin: 0 auto;  
+	width:100%;
+	height:auto;
+	background: url(images/bg_out.jpg) repeat-x;
+}	 
+.iner{
+    margin: 0 auto;  
+	width:1004px;
+	height:600px;
+	background: url(images/bg.png) no-repeat 0 -0px;
+}
+.login{
+	width:194px; 
+    height: 230px; 
+	font-family:Verdana,宋体,san-serif; 
+	padding-top:215px; 
+	padding-left:310px; 
+	margin:0 auto;
+}
+.texttop{
+	text-align:right; 
+	width:194px; 
+	color:#ba1021; 
+	font-size:12px; 
+	line-height:16px; 
+	height:16px;
+	margin-bottom:35px; 
+	margin-right:0px;
+}	
+.user{
+	margin-bottom:50px; 
+	height:30px; 
+	width:194px; 
+	float:left;
+}
+.user input{
+	float:right; 
+	width:194px;
+}
+.user input.text{ 
+    border:none; 
+	width:174px; 
+	height:30px; 
+	line-height:30px; 
+	padding: 0 10px; 
+	background: url(images/ico.png) no-repeat; 
+	color: #000; 
+	font-size: 16px;
+}
+.pass{
+	margin-bottom:20px; 
+	height:30px; 
+	width:194px; 
+	float:left;
+}
+.pass input{
+	float:right; 
+	width:194px;
+}
+.pass input.text{ 
+    border:none; 
+	width:174px; 
+	height:30px; 
+	line-height:30px;
+	padding: 0 10px; 
+	background: url(images/ico.png) no-repeat; 
+	color:#000; 
+	font-size:16px; 
+}
+
+.login_button{ 
+    width:194px; 
+	height:40px; 
+	float:left;
+	padding:0;
+
+}
+.login_button ul.menu{	
+    width:194px;
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+.login_button ul.menu li{
+	float:left;
+	display:block;
+}
+
+.login_button ul.menu li a.on{
+	display:block;
+	background:url(images/user_on.png) 0 0 no-repeat;
+	width:87px;
+	height:40px;
+	float:left;
+	margin-right:20px;
+	_margin-right:10px;
+	
+}
+.login_button ul.menu li a.on:hover{
+	background:url(images/user_off.png) 0 0 no-repeat;
+}
+
+.login_button ul.menu li a.repeat{
+	display:block;
+	background:url(images/repeat_on.png) 0 0 no-repeat;
+	width:87px;
+	height:40px;
+	float:right;
+	
+}
+.login_button ul.menu li a.repeat:hover{
+	background:url(images/repeat_off.png) 0 0 no-repeat;
+}
+
+
+.iner_leave{
+    margin: 0 auto;  
+	width:1004px;
+	height:auto;
+	background: url(images/bgleave.png) no-repeat 0 -0px;
+}
+.login_leave{
+	width:1004px; 
+    height:600px; 
+	font-family:Verdana,宋体,san-serif; 
+	
+}
+.login_leave div.icon{
+	display:block;
+	width:87px;
+	height:40px;
+	position:absolute;
+    list-style:none;
+	margin-top:365px;
+	margin-left:605px;
+	float:left;
+}
+
+.login_leave div.icon a.on_leave{
+	display:block;
+	background:url(images/user_on.png) 0 0 no-repeat;
+	width:87px;
+	height:40px;
+	float:left;	
+}
+.login_leave div.icon a.on_leave:hover{
+	background:url(images/user_off.png) 0 0 no-repeat;
+}
+
+
+
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="sldt_ssm">
+        <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/configs"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/patch_cas"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/patch_cas_jboss_cache"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/patch_cas_logout"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/patch_cgbsso"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/patch_ldaptive"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/patch_openid4java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/patch_cas_sldt"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/patch_sdp"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/patch_shiro_cas_logout"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/patch_shiro_cas_logout_ssm"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/pac4j_hzbank_sso"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/pac4j-cgbsso-src"/>
+        <property name="java-output-path" value="/sldt_ssm/WebRoot/WEB-INF/classes"/>
+        <property name="context-root" value="sldt_ssm"/>
+    </wb-module>
+</project-modules>
