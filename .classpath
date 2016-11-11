@@ -5,7 +5,6 @@
 	<classpathentry kind="src" path="configs"/>
 	<classpathentry kind="src" path="patch_cas"/>
 	<classpathentry kind="src" path="patch_cas_jboss_cache"/>
-	<classpathentry kind="src" path="patch_cas_logout"/>
 	<classpathentry kind="src" path="patch_cgbsso"/>
 	<classpathentry kind="src" path="patch_ldaptive"/>
 	<classpathentry kind="src" path="patch_openid4java"/>
